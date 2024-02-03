@@ -8,6 +8,10 @@ llm = OpenAI(temperature = 0.7 )
 
 """
 Build two chains and use Chain functions
+----------------------------------------------------------
+
+The SimpleSeqChain outputs only the response of the last chain ie Itinerary, 
+but we cant get output of the previous chain- ie Tourist Place name
 
 """
 
@@ -46,8 +50,3 @@ from langchain.chains import SimpleSequentialChain
 final_chain = SimpleSequentialChain(chains=[TouristPlace_chain,Itinerary_chain])
 response = final_chain.run("Egypt")
 print(response)
-
-"""
-The SimpleSeqChain outputs only the response of the last chain ie Itinerary, 
-but we cant get output of the first chain ie Tourist Place name
-"""

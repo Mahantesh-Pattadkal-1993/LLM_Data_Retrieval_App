@@ -8,6 +8,9 @@ llm = OpenAI(temperature = 0.7 )
 
 """
 Build two chains and use Sequential Chain functions
+------------------------------------
+
+we can get output of the previous chain- ie Tourist Place name (this is not possible with simple chains)
 
 """
 

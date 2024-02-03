@@ -1,3 +1,10 @@
+"""
+Desc: This code show how to build a Q&A bot on top of your custom text.
+Here, the text is vectorised and stored in the vector store 
+Further the vector store is queried
+"""
+
+
 import os
 import sys
 
@@ -14,7 +21,12 @@ from Credentials import api_key
 
 
 os.environ["OPENAI_API_KEY"]= api_key
-llm = OpenAI(openai_api_key=api_key)
+
+#specify the model of choice
+model = "gpt-3.5-turbo-instruct"
+
+llm = OpenAI(model=model, temperature = 0.7 )
+
 
 
 #chat_model = ChatOpenAI(openai_api_key=api_key)
@@ -25,3 +37,9 @@ loader = TextLoader("text.txt")
 index = VectorstoreIndexCreator().from_loaders([loader])
 
 print(index.query("What is my Name?"))
+
+
+"""  
+To fix: with deprecation of da-vinci-03, this code fails
+
+"""

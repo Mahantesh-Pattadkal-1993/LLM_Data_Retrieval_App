@@ -1,3 +1,11 @@
+"""  
+Description:
+This .py file contains funtions that are used by the app.py for generating the responses
+
+"""
+
+
+
 import os
 from Credentials import api_key
 os.environ["OPENAI_API_KEY"] = api_key
@@ -8,10 +16,16 @@ llm = OpenAI(temperature = 0.7 )
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 
+"""
+This file contains the generate response function 
+
+Input  --> Country
+Output --> Tourist Place, Itinerary on how to reach the Tourist Place from Mumbai 
+
+"""
+
 # function generate itinerary
 def generate_response(CountryOfChoice):
-
-
 
 #------------------------------------------------------------
 # Chain 1 -  Identify Tourist Place
@@ -29,7 +43,6 @@ def generate_response(CountryOfChoice):
 # Chain 2 -  Generate Itinerary
 #------------------------------------------------
 
-
     prompt_Itinerary = PromptTemplate(
 
     input_variables= ["TouristPlace"],
@@ -38,11 +51,14 @@ def generate_response(CountryOfChoice):
 
     Itinerary_chain = LLMChain(llm=llm, prompt=prompt_Itinerary, output_key="Itinerary")
 
+#----------------------------------------------------
 # Combine both the chains
-
+#----------------------------------------------------
+    
     from langchain.chains import SequentialChain
 
     final_chain = SequentialChain(
+    
     chains = [TouristPlace_chain,Itinerary_chain],
     input_variables= ["Country"],
     output_variables= ["TouristPlace","Itinerary"]
@@ -55,3 +71,5 @@ def generate_response(CountryOfChoice):
 
     return {"TouristPlace": response["TouristPlace"],
             "Itinerary": response["Itinerary"] }
+
+

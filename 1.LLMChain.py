@@ -2,9 +2,11 @@ import os
 from Credentials import api_key
 os.environ["OPENAI_API_KEY"] = api_key
 
+#specify the model of choice
+model = "gpt-3.5-turbo-instruct"
 
 from langchain.llms import OpenAI 
-llm = OpenAI(temperature = 0.7 )
+llm = OpenAI(model=model, temperature = 0.7 )
 #place = llm("Suggest me one famous tourist place from India")
 #print(place)
 
@@ -25,8 +27,8 @@ prompt_TouristPlace = PromptTemplate(
 
 from langchain.chains import LLMChain
 
-TouristPlace_chain = LLMChain(llm=llm, prompt=prompt_TouristPlace)
-out = chain.run("England")
+TouristPlace_chain = LLMChain(llm=llm,prompt=prompt_TouristPlace)
+out = TouristPlace_chain.run("England")
 print(out)
 
 
